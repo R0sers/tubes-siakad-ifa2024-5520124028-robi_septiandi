@@ -16,9 +16,9 @@ class DosenSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             DB::table('dosen')->insert([
-                'nidn' => $faker->unique()->numberBetween(210903, 210912),
+                'nidn' => $faker->unique()->numberBetween(210900, 210999),
                 'nama' => $faker->name(),
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -12,7 +12,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">NIDN</label>
-                        <input type="text" class="form-control" name="nidn" value="{{ $dataDosen->nidn }}">
+                        <input type="text" class="form-control" name="nidn" value="{{ $dataDosen->nidn }}" readonly>
                     </div>
 
                     <div class="mb-3">

@@ -6,8 +6,8 @@
         <div class="card">
             <div class="card-header">Detail Dosen</div>
             <div class="card-body">
-                <p>NIDN: {{ $dataDosen->nidn }}</p>
-                <p>Nama: {{ $dataDosen->nama }}</p>
+                <p>NIDN: <b>{{ $dataDosen->nidn }}</b></p>
+                <p>Nama: <b>{{ $dataDosen->nama }}</b></p>
             </div>
         </div>
     </div>

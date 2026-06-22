@@ -21,4 +21,9 @@ use Illuminate\Database\Eloquent\Model;
     {
         return $this->belongsTo(MataKuliah::class, 'kode_matakuliah', 'kode_matakuliah');
     }
+
+        public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'npm', 'npm');
+    }
 }

@@ -120,7 +120,7 @@ Akses aplikasi di **http://localhost:8000** 🎉 -->
 
 ## 📁 Struktur Direktori
 
-```
+<!-- ```
 siakad/
 ├── 📂 app/
 │   ├── Http/
@@ -149,7 +149,7 @@ siakad/
 ├── 📂 routes/
 │   └── web.php
 └── 📂 public/
-```
+``` -->
 
 ---
 
@@ -164,7 +164,6 @@ siakad/
 
 </div>
 
-> ✏️ *Sesuaikan dengan nama, NIM, dan peran anggota kelompokmu.*
 
 ---
 

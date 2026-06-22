@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
 
 class MahasiswaController extends Controller
 {
@@ -14,19 +15,19 @@ class MahasiswaController extends Controller
     public function index()
     {
 
-      
-        $dataMahasiswa = Mahasiswa::with(['dosen'])
-        ->when(request('search'), function ($query, $search) {
-            return $query->where('npm', 'like', "%{$search}%")
-                        ->orWhere('nama', 'like', "%{$search}%")
 
-            ->orWhereHas('dosen', function ($q2) use ($search) {
-            $q2->where('nidn', 'like', "%{$search}%");
-                        });
-        })
-        ->orderBy('npm', 'asc')
-        ->paginate(25)
-        ->withQueryString();
+        $dataMahasiswa = Mahasiswa::with(['dosen'])
+            ->when(request('search'), function ($query, $search) {
+                return $query->where('npm', 'like', "%{$search}%")
+                    ->orWhere('nama', 'like', "%{$search}%")
+
+                    ->orWhereHas('dosen', function ($q2) use ($search) {
+                        $q2->where('nidn', 'like', "%{$search}%");
+                    });
+            })
+            ->orderBy('npm', 'asc')
+            ->paginate(25)
+            ->withQueryString();
 
         return view('mahasiswa.mahasiswa', compact('dataMahasiswa'));
     }
@@ -36,7 +37,12 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.form-mahasiswa');
+
+        $dosen = DB::table('dosen')->get();
+        $matakuliah = DB::table('matakuliah')->get();
+        $jadwal = DB::table('jadwal')->get();
+
+        return view('mahasiswa.form-mahasiswa', compact('dosen', 'matakuliah','jadwal'));
     }
 
     /**
@@ -44,9 +50,9 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-            $validated = $request->validate([
+        $validated = $request->validate([
             'npm' => 'required|numeric|unique:mahasiswa',
-            'nidn' => 'required|numeric',
+            'nidn' => 'required|numeric|exists:dosen,nidn',
             'nama' => 'required',
         ]);
         // $validated['nidn'] = 1;
@@ -59,14 +65,15 @@ class MahasiswaController extends Controller
      */
     public function show(string $id)
     {
-          //query db builder
+        //query db builder
         //$detailBuku = DB::table('buku')->where('id', $id)->firstOrFail();
 
         //orm
         // $detailBuku = Buku::find($id);
-        $dataMahasiswa = Mahasiswa::findOrFail($id);        
+        $dataMahasiswa = Mahasiswa::findOrFail($id);
+        $dosen = Dosen::all();
 
-        return view('mahasiswa.detail-mahasiswa', compact('dataMahasiswa'));
+        return view('mahasiswa.detail-mahasiswa', compact('dataMahasiswa','dosen'));
     }
 
     /**
@@ -75,7 +82,8 @@ class MahasiswaController extends Controller
     public function edit(string $npm)
     {
         $dataMahasiswa = Mahasiswa::where('npm', $npm)->firstOrFail();
-        return view('mahasiswa.form-edit-mahasiswa', compact('dataMahasiswa'));
+        $dosen = Dosen::all();
+        return view('mahasiswa.form-edit-mahasiswa', compact('dataMahasiswa', 'dosen'));
     }
 
     /**
@@ -100,6 +108,6 @@ class MahasiswaController extends Controller
         Mahasiswa::where('npm', $npm)->delete();
 
         return redirect()->route('mahasiswa')
-                ->with('delete', 'Data berhasil dihapus');
+            ->with('delete', 'Data berhasil dihapus');
     }
 }

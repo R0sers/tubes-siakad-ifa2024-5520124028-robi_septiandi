@@ -18,7 +18,14 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">NIDN</label>
-                        <input type="text" class="form-control" name="nidn" value="{{ $dataMahasiswa->nidn }}">
+                        <select class="form-control" name="nidn">
+                            <option value="">-- Pilih Dosen --</option>
+                            @foreach($dosen as $dsn)
+                                <option value="{{ $dsn->nidn }}" {{ old('nidn', $dataMahasiswa->nidn) == $dsn->nidn ? 'selected' : '' }}>
+                                    {{ $dsn->nidn }} - {{ $dsn->nama }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('nidn')
                             <div class="form-text text-danger">{{ $message }}</div>
                         @enderror

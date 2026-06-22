@@ -13,26 +13,28 @@ class JadwalController extends Controller
      */
     public function index()
     {
-       
+
         $search = request('search');
 
         $dataJadwal = Jadwal::with(['dosen', 'MataKuliah'])
-        ->when($search, function ($query, $search) {
-            return $query->where('id', 'like', "%{$search}%")
-                        ->orWhereHas('MataKuliah', function ($q2) use ($search) {
-                            $q2->where('kode_matakuliah', 'like', "%{$search}%");
-                        })
-                        ->orWhereHas('dosen', function ($q2) use ($search) {
-                            $q2->where('nidn', 'like', "%{$search}%");
-                        })
-                        ->orWhere('hari', 'like', "%{$search}%")
-                        ->orWhere('kelas', 'like', "%{$search}%");
-        })
-        ->orderBy('id', 'asc')
-        ->paginate(7)
-        ->withQueryString();
+            ->when($search, function ($query, $search) {
+                return $query->where('id', 'like', "%{$search}%")
+                    ->orWhereHas('MataKuliah', function ($q2) use ($search) {
+                        $q2->where('kode_matakuliah', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('dosen', function ($q2) use ($search) {
+                        $q2->where('nidn', 'like', "%{$search}%");
+                    })
+                    ->orWhere('hari', 'like', "%{$search}%")
+                    ->orWhere('kelas', 'like', "%{$search}%");
+            })
+            ->orderBy('id', 'asc')
+            ->paginate(7)
+            ->withQueryString();
+
 
         return view('jadwal.jadwal', compact('dataJadwal'));
+
     }
 
     /**
@@ -40,7 +42,10 @@ class JadwalController extends Controller
      */
     public function create()
     {
-        return view('jadwal.form-jadwal');
+        $matakuliah = DB::table('matakuliah')->get();
+        $dosen = DB::table('dosen')->get();
+
+        return view('jadwal.form-jadwal', compact('matakuliah', 'dosen'));
     }
 
     /**
@@ -49,11 +54,11 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'id' => 'required|numeric|unique:jadwal',
             'kode_matakuliah' => 'required',
             'nidn' => 'required|numeric|exists:dosen,nidn',
             'kelas' => 'required',
             'hari' => 'required',
+            'jam' => 'required',
         ]);
         Jadwal::create($validated);
         return redirect()->route('jadwal')->with('success', 'Data berhasil ditambah');
@@ -64,12 +69,12 @@ class JadwalController extends Controller
      */
     public function show(string $id)
     {
-                  //query db builder
+        //query db builder
         //$detailBuku = DB::table('buku')->where('id', $id)->firstOrFail();
 
         //orm
         // $detailBuku = Buku::find($id);
-        $dataJadwal = Jadwal::findOrFail($id);        
+        $dataJadwal = Jadwal::findOrFail($id);
 
         return view('jadwal.detail-jadwal', compact('dataJadwal'));
     }
@@ -109,6 +114,6 @@ class JadwalController extends Controller
         Jadwal::where('id', $id)->delete();
 
         return redirect()->route('jadwal')
-                ->with('success', 'Data berhasil dihapus');
+            ->with('success', 'Data berhasil dihapus');
     }
 }

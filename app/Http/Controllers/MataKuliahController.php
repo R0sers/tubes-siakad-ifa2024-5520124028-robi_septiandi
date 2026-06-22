@@ -12,16 +12,16 @@ class MataKuliahController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         $dataMatkul = MataKuliah::all();
         $dataMatkul = MataKuliah::when(request('search'), function ($query, $search) {
             return $query->where('kode_matakuliah', 'like', "%{$search}%")
-                        ->orWhere('nama_matakuliah', 'like', "%{$search}%")
-                        ->orWhere('sks', 'like', "%{$search}%");
+                ->orWhere('nama_matakuliah', 'like', "%{$search}%")
+                ->orWhere('sks', 'like', "%{$search}%");
         })
-        ->orderBy('kode_matakuliah', 'asc')
-        ->paginate(5)
-        ->withQueryString();
+            ->orderBy('kode_matakuliah', 'asc')
+            ->paginate(5)
+            ->withQueryString();
 
         return view('MataKuliah.mk', compact('dataMatkul'));
     }
@@ -31,7 +31,9 @@ class MataKuliahController extends Controller
      */
     public function create()
     {
-        return view('MataKuliah.form-mk');
+        $dosen = MataKuliah::all();
+
+        return view('MataKuliah.form-mk', compact('dosen'));
     }
 
     /**
@@ -42,7 +44,10 @@ class MataKuliahController extends Controller
         $validated = $request->validate([
             'kode_matakuliah' => 'required|unique:matakuliah,kode_matakuliah',
             'nama_matakuliah' => 'required',
-            'sks' => 'required|numeric',
+                'sks' => 'required|in:1,2,3,4,6'
+                    ], [
+                        'sks.required' => 'Jumlah SKS harus diisi.',
+                        'sks.in' => 'Jumlah SKS hanya boleh 1, 2, 3, 4, atau 6.'
         ]);
 
         MataKuliah::create($validated);
@@ -75,7 +80,10 @@ class MataKuliahController extends Controller
         $validated = $request->validate([
             'kode_matakuliah' => 'required|unique:matakuliah,kode_matakuliah,' . $id . ',kode_matakuliah',
             'nama_matakuliah' => 'required',
-            'sks' => 'required|numeric',
+            'sks' => 'required|in:1,2,3,4,6'
+                    ], [
+                        'sks.required' => 'Jumlah SKS harus diisi.',
+                        'sks.in' => 'Jumlah SKS hanya boleh 1, 2, 3, 4, atau 6.'
         ]);
 
         MataKuliah::where('kode_matakuliah', $id)->update($validated);
