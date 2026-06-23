@@ -19,7 +19,7 @@ class MahasiswaSeeder extends Seeder
 
         $nidnList = DB::table('dosen')->pluck('nidn')->toArray();
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             DB::table('mahasiswa')->insert([
                 'npm' => '5520124' . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'nidn' => $faker->randomElement($nidnList),

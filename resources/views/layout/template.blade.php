@@ -25,11 +25,12 @@
       text-align: center;
     }
   </style>
-  <!-- Bootstrap CSS -->
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" ...>
 
-  <!-- Tambahkan ini ↓ -->
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
 
 </head>
 
@@ -46,7 +47,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{url('/home')}}">Beranda</a>
           </li>
-          
+
           @if(Auth::User()->role == 'admin')
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{url('/mahasiswa')}}">Mahasiswa</a>
@@ -57,14 +58,15 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{url('/matkul')}}">Mata Kuliah</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{url('/jadwal')}}">Jadwal</a>
+            </li>
           @endif
 
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{url('/krs')}}">KRS</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{url('/jadwal')}}">Jadwal</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">Logout</a>
           </li>

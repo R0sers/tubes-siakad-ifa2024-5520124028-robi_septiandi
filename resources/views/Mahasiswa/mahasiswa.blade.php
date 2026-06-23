@@ -11,7 +11,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <div class="card p-3">
+        <div class="card-academic p-3">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <a href="{{ route('form-mahasiswa') }}" class="btn btn-primary btn-sm">Tambah Data</a>
 
@@ -31,7 +31,7 @@
                         <th>NPM</th>
                         <th>Nama Mahasiswa</th>
                         <th>NIDN</th>
-                        <th>Nama Dosen</th>
+                        <th>Nama Wali Dosen</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

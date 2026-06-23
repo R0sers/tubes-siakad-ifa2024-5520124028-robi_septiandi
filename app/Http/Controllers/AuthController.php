@@ -1,64 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('login');
     }
 
-    public function login(Request $request){
-
+    public function login(Request $request)
+    {
         $request->validate([
-                    'email'=>'required',
-                    'password'=>'required'
-                ],
-                [
-                    'email.required'=>'Email wajib diisi',
-                    'password.required'=>'Password wajib diisi',            
-                ]
-        );
-        // return view('pages.beranda');
+            'username' => 'required',
+            'password' => 'required',
+        ], [
+            'username.required' => 'Username/Email wajib diisi',
+            'password.required' => 'Password wajib diisi',
+        ]);
 
+
+        $loginField = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'npm';
 
         $infoLogin = [
-            'email'=>$request->email,
-            'password'=>$request->password
+            $loginField => $request->username,
+            'password'  => $request->password,
         ];
 
-        // if(Auth::attempt($infoLogin)){
-        //     // echo 'sukses';
-        //     return view('pages.beranda');
-        // }
-        // else{
-        //     // echo 'usename dan password salah';
-        //     return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
-        // }
-
-        if(Auth::attempt($infoLogin)){
-
-            if(Auth::user()->role =='admin'){
-                // return redirect('admin/operator');
-                return view('home');
-            }
-            elseif(Auth::user()->role =='mahasiswa'){
-                // return redirect('admin/operator');
-                return view('home');
-            }
-
-        }
-        else{
-            return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
+        if (Auth::attempt($infoLogin)) {
+            $request->session()->regenerate();
+            return redirect()->route('homeindex');
         }
 
+        return redirect('')->withErrors('Username dan password tidak sesuai')->withInput();
     }
 
-    function logout(){
+    public function logout(Request $request)
+    {
         Auth::logout();
-        return redirect('');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

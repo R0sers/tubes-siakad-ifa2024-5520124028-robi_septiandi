@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-3">
         <h1>Tambah data Mahasiswa</h1>
-        <div class="card">
+        <div class="card-academic">
             <div class="card-header">Tambah Mahasiswa</div>
             <div class="card-body">
                 <form method="POST" action="{{ route('mahasiswastore') }}">
@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <label class="form-label">NIDN</label>
                         <select class="form-control" name="nidn">
-                            <option value="nidn">-- Pilih NIDN Dosen --</option>
+                            <option value="nidn">-- Pilih NIDN Wali Dosen --</option>
                             @foreach($dosen as $dsn)
                                 <option value="{{ $dsn->nidn }}">
                                     {{ $dsn->nidn }} - {{ $dsn->nama }}

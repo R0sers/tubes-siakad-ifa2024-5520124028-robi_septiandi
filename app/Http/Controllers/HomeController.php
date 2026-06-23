@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,7 +14,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view("home");
+
+    
+        $totalMahasiswa = Mahasiswa::count();
+        $totalDosen = Dosen::count();
+        $totalMatkul = MataKuliah::count();
+
+        return view('home', compact('totalMahasiswa', 'totalDosen', 'totalMatkul'));
+    
     }
 
     /**

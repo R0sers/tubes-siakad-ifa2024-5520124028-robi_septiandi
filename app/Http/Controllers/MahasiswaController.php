@@ -22,7 +22,9 @@ class MahasiswaController extends Controller
                     ->orWhere('nama', 'like', "%{$search}%")
 
                     ->orWhereHas('dosen', function ($q2) use ($search) {
-                        $q2->where('nidn', 'like', "%{$search}%");
+                        $q2->where('nidn', 'like', "%{$search}%")
+                            ->orWhere('nama', 'like', "%{$search}%");
+                        ;
                     });
             })
             ->orderBy('npm', 'asc')
@@ -42,7 +44,7 @@ class MahasiswaController extends Controller
         $matakuliah = DB::table('matakuliah')->get();
         $jadwal = DB::table('jadwal')->get();
 
-        return view('mahasiswa.form-mahasiswa', compact('dosen', 'matakuliah','jadwal'));
+        return view('mahasiswa.form-mahasiswa', compact('dosen', 'matakuliah', 'jadwal'));
     }
 
     /**
@@ -73,7 +75,7 @@ class MahasiswaController extends Controller
         $dataMahasiswa = Mahasiswa::findOrFail($id);
         $dosen = Dosen::all();
 
-        return view('mahasiswa.detail-mahasiswa', compact('dataMahasiswa','dosen'));
+        return view('mahasiswa.detail-mahasiswa', compact('dataMahasiswa', 'dosen'));
     }
 
     /**

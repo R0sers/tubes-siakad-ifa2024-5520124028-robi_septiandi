@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/matkul/{id}', [MataKuliahController::class, 'destroy'])->name('matkul.destroy');
         Route::get('/show/{id}/detail-matkul', [MataKuliahController::class, 'show'])->name('detail-matkul');
 
-        // Jadwal — hanya admin yang boleh create/edit/delete (atur dosen, hari/jam, kelas)
+
         Route::get('/form-jadwal', [JadwalController::class, 'create'])->name('form-jadwal');
         Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwalupdate');
         Route::post('/jadwal', [JadwalController::class, 'store'])->name('jadwalstore');
@@ -54,24 +54,28 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/jadwal/{id}', [JadwalController::class, 'destroy'])->name('jadwal.destroy');
     });
 
-    // ====== ADMIN & MAHASISWA: lihat jadwal ======
+
     Route::middleware(['auth', 'userAkses:admin,mahasiswa'])->group(function () {
         Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal');
         Route::get('/show/{id}/detail-jadwal', [JadwalController::class, 'show'])->name('detail-jadwal');
     });
 
-    // ====== ADMIN & MAHASISWA: KRS (tambah, drop, lihat) ======
-    Route::middleware(['auth', 'userAkses:admin,mahasiswa'])->group(function () {
+  
+    Route::middleware(['auth','userAkses:admin,mahasiswa'])->group(function () {
 
-        Route::get('/home', [HomeController::class, 'index'])->name('homeindex');             // lihat daftar KRS
-        Route::get('/krs', [KRSController::class, 'index'])->name('krs');             // lihat daftar KRS
-        Route::get('/form-krs', [KRSController::class, 'create'])->name('form-krs');  // form ambil matkul
-        Route::post('/krs', [KRSController::class, 'store'])->name('krsstore');       // simpan KRS (ambil matkul)
-        Route::delete('/krs/{id}', [KRSController::class, 'destroy'])->name('krs.destroy'); // drop matkul
+        Route::get('/home', [HomeController::class, 'index'])->name('homeindex');     
+        Route::get('/krs', [KRSController::class, 'index'])->name('krs');             
+        Route::get('/form-krs', [KRSController::class, 'create'])->name('form-krs');  
+        Route::post('/krs', [KRSController::class, 'store'])->name('krsstore');       
+        Route::delete('/krs/{id}', [KRSController::class, 'destroy'])->name('krs.destroy'); 
         Route::get('/show/{id}/detail-krs', [KRSController::class, 'show'])->name('detail-krs');
+
+
+        Route::get('/krs/{npm}/export-pdf', [KRSController::class, 'exportPdf'])->name('krs.export-pdf');
+        Route::get('/krs/{npm}/export-excel', [KRSController::class, 'exportExcel'])->name('krs.export-excel');
     });
 
-    // ====== KHUSUS ADMIN: edit KRS mahasiswa lain ======
+
     Route::middleware(['auth', 'userAkses:admin'])->group(function () {
         Route::put('/krs/{id}', [KRSController::class, 'update'])->name('krsupdate');
         Route::get('/krs/{id}/edit', [KRSController::class, 'edit'])->name('form-edit-krs');

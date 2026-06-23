@@ -17,6 +17,8 @@ return new class extends Migration
             $table->char('kode_matakuliah', 8);
             $table->foreign('npm')->references('npm')->on('mahasiswa')->onDelete('cascade');
             $table->foreign('kode_matakuliah')->references('kode_matakuliah')->on('matakuliah')->onDelete('cascade');
+            $table->unsignedBigInteger('jadwal_id')->nullable();
+            $table->foreign('jadwal_id')->references('id')->on('jadwal')->onDelete('cascade');
             $table->timestamps();
         });
     }

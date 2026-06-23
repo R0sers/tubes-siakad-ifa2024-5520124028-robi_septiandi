@@ -9,7 +9,7 @@
                 <p>NPM : <b>{{ $dataMahasiswa->npm }}</b></p>
                 <p>Nama Mahasiswa : <b>{{ $dataMahasiswa->nama }}</b></p>
                 <p>NIDN : <b>{{ $dataMahasiswa->nidn }}</b></p>
-                <p>Nama Dosen : <b>{{ $dataMahasiswa->dosen?->nama ?? '--' }}</b></p>
+                <p>Nama Wali Dosen : <b>{{ $dataMahasiswa->dosen?->nama ?? '--' }}</b></p>
             </div>
         </div>
     </div>

@@ -17,9 +17,9 @@ class Jadwal extends Model
         return $this->belongsTo(Dosen::class, 'nidn', 'nidn');
     }
 
-    public function MataKuliah()
+    public function matakuliah()
     {
-        return $this->hasMany(MataKuliah::class, 'kode_matakuliah', 'kode_matakuliah');
+        return $this->belongsto(Matakuliah::class, 'kode_matakuliah', 'kode_matakuliah');
     }
 
     

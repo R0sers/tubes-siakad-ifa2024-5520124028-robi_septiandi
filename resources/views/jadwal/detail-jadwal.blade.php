@@ -6,7 +6,6 @@
         <div class="card">
             <div class="card-header">Detail Jadwal</div>
             <div class="card-body">
-                <p>ID: {{ $dataJadwal->id }}</p>
                 <p>Kode Matakuliah: {{ $dataJadwal->kode_matakuliah }}</p>
                 <p>NIDN: {{ $dataJadwal->nidn }}</p>
                 <p>Kelas: {{ $dataJadwal->kelas }}</p>

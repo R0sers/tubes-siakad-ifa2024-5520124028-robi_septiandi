@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Jadwal;
+use App\Models\Dosen;
 
 class JadwalController extends Controller
 {
@@ -13,28 +14,26 @@ class JadwalController extends Controller
      */
     public function index()
     {
-
         $search = request('search');
 
-        $dataJadwal = Jadwal::with(['dosen', 'MataKuliah'])
+        $dataJadwal = Jadwal::with(['dosen', 'matakuliah'])
             ->when($search, function ($query, $search) {
                 return $query->where('id', 'like', "%{$search}%")
-                    ->orWhereHas('MataKuliah', function ($q2) use ($search) {
+                    ->orWhereHas('matakuliah', function ($q2) use ($search) {
                         $q2->where('kode_matakuliah', 'like', "%{$search}%");
                     })
                     ->orWhereHas('dosen', function ($q2) use ($search) {
                         $q2->where('nidn', 'like', "%{$search}%");
                     })
                     ->orWhere('hari', 'like', "%{$search}%")
+                    ->orWhere('jam', 'like', "%{$search}%")
                     ->orWhere('kelas', 'like', "%{$search}%");
             })
-            ->orderBy('id', 'asc')
+            ->orderBy('kode_matakuliah', 'asc')
             ->paginate(7)
             ->withQueryString();
 
-
         return view('jadwal.jadwal', compact('dataJadwal'));
-
     }
 
     /**
@@ -69,11 +68,7 @@ class JadwalController extends Controller
      */
     public function show(string $id)
     {
-        //query db builder
-        //$detailBuku = DB::table('buku')->where('id', $id)->firstOrFail();
 
-        //orm
-        // $detailBuku = Buku::find($id);
         $dataJadwal = Jadwal::findOrFail($id);
 
         return view('jadwal.detail-jadwal', compact('dataJadwal'));
@@ -84,8 +79,10 @@ class JadwalController extends Controller
      */
     public function edit(string $id)
     {
-        $dataJadwal = Jadwal::where('id', $id)->firstOrFail();
-        return view('jadwal.form-edit-jadwal', compact('dataJadwal'));
+        $dataJadwal = Jadwal::findOrFail($id);
+        $dosen = Dosen::orderBy('nama')->get();
+
+        return view('jadwal.form-edit-jadwal', compact('dataJadwal', 'dosen'));
     }
 
     /**

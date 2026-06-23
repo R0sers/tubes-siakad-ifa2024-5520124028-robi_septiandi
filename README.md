@@ -3,9 +3,10 @@
 <img src="https://img.shields.io/badge/-%F0%9F%8E%93%20SIAKAD-0d1117?style=for-the-badge" alt="SIAKAD"/>
 
 # SIAKAD
+
 ### Sistem Informasi Akademik
 
-<p>Aplikasi web untuk mengelola data akademik perguruan tinggi secara terpusat dan efisien.</p>
+<p>ROXE SIAKAD Adalah Sistem Informasi berbasis web untuk mengelola dan memberikan informasi data akademik perguruan tinggi.  </p>
 
 ![Tugas Besar](https://img.shields.io/badge/Tugas%20Besar-Pemrograman%20Web%202-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-In%20Development-yellow?style=flat-square)
@@ -20,7 +21,7 @@
 
 ## 📋 Tentang Proyek
 
-**SIAKAD** *(Sistem Informasi Akademik)* adalah aplikasi berbasis web yang dikembangkan sebagai **Tugas Besar Mata Kuliah Pemrograman Web 2**. Aplikasi ini menyediakan platform terpusat bagi administrator, dosen, dan mahasiswa untuk mengelola seluruh kegiatan akademik — mulai dari data dosen dan mahasiswa, pengaturan mata kuliah, penjadwalan perkuliahan, hingga pengisian KRS.
+**SIAKAD** _(Sistem Informasi Akademik)_ adalah aplikasi berbasis web yang dikembangkan sebagai **Tugas Besar Mata Kuliah Pemrograman Web 2**. Aplikasi ini menyediakan platform terpusat bagi administrator, dan mahasiswa untuk mengelola seluruh kegiatan akademik — mulai dari data dosen dan mahasiswa, pengaturan mata kuliah, penjadwalan perkuliahan, hingga pengisian KRS.
 
 ---
 
@@ -33,7 +34,7 @@
   </tr>
   <tr>
     <td align="center">👨‍🎓<br><b>Data Mahasiswa</b></td>
-    <td>Kelola profil mahasiswa (NIM, nama, program studi, angkatan, dan status akademik)</td>
+    <td>Kelola profil mahasiswa (NPM, nama, Wali dosen, KRS)</td>
   </tr>
   <tr>
     <td align="center">📚<br><b>Mata Kuliah</b></td>
@@ -41,11 +42,11 @@
   </tr>
   <tr>
     <td align="center">🗓️<br><b>Jadwal Perkuliahan</b></td>
-    <td>Susun jadwal kuliah per semester, atur ruangan, hari & jam, dan cegah bentrok jadwal</td>
+    <td>Kode matakuliah, Nama Matakuliah, Dosen Pengampu, Informasi Jadwal</td>
   </tr>
   <tr>
     <td align="center">📝<br><b>KRS</b></td>
-    <td>Pengisian & persetujuan KRS, validasi batas SKS, dan riwayat KRS per mahasiswa</td>
+    <td>Pengisian & Dan Informasi Kartu Rencana Studi</td>
   </tr>
 </table>
 
@@ -55,101 +56,17 @@
 
 <div align="center">
 
-| Layer | Teknologi |
-|-------|-----------|
-<!-- | **Frontend** | HTML5, | -->
-| **Backend** | PHP 8.3, Laravel |
-| **Database** | MySQL  |
-| **Server** | Apache (Laragon) |
-| **Version Control** | Git & GitHub |
+| Layer               | Teknologi        |
+| ------------------- | ---------------- | ------ | --- |
+| <!--                | **Frontend**     | HTML5, | --> |
+| **Backend**         | PHP 8.3, Laravel |
+| **Database**        | MySQL            |
+| **Server**          | Apache (Laragon) |
+| **Version Control** | Git & GitHub     |
 
 </div>
 
 ---
-
-## 🚀 Cara Menjalankan
-
-### Prasyarat
-Pastikan sudah terinstal:
-- [PHP](https://www.php.net/) >= 8.0
-- [Composer](https://getcomposer.org/)
-- [MySQL](https://www.mysql.com/) / [XAMPP](https://www.apachefriends.org/) / [Laragon](https://laragon.org/)
-- [Git](https://git-scm.com/)
-
-<!-- ### Instalasi
-
-```bash
-# 1. Clone repositori
-git clone https://github.com/username/siakad.git
-cd siakad
-
-# 2. Install dependensi PHP
-composer install
-
-# 3. Salin file environment
-cp .env.example .env
-
-# 4. Generate application key
-php artisan key:generate
-```
-
-### Konfigurasi Database
-
-Edit file `.env` dan sesuaikan konfigurasi berikut:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=siakad
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-```bash
-# 5. Jalankan migrasi & seeder
-php artisan migrate --seed
-
-# 6. Jalankan server lokal
-php artisan serve
-```
-
-Akses aplikasi di **http://localhost:8000** 🎉 -->
-
----
-
-## 📁 Struktur Direktori
-
-<!-- ```
-siakad/
-├── 📂 app/
-│   ├── Http/
-│   │   └── Controllers/
-│   │       ├── DosenController.php
-│   │       ├── MahasiswaController.php
-│   │       ├── MataKuliahController.php
-│   │       ├── JadwalController.php
-│   │       └── KrsController.php
-│   └── Models/
-│       ├── Dosen.php
-│       ├── Mahasiswa.php
-│       ├── MataKuliah.php
-│       ├── Jadwal.php
-│       └── Krs.php
-├── 📂 database/
-│   ├── migrations/
-│   └── seeders/
-├── 📂 resources/
-│   └── views/
-│       ├── dosen/
-│       ├── mahasiswa/
-│       ├── matakuliah/
-│       ├── jadwal/
-│       └── krs/
-├── 📂 routes/
-│   └── web.php
-└── 📂 public/
-``` -->
 
 ---
 
@@ -157,13 +74,11 @@ siakad/
 
 <div align="center">
 
-| Nama | NIM | 
-|------|-----|
-| Robi Septiandi | 5520124028 | 
-
+| Nama           | NPM        |
+| -------------- | ---------- |
+| Robi Septiandi | 5520124028 |
 
 </div>
-
 
 ---
 
@@ -171,13 +86,13 @@ siakad/
 
 <div align="center">
 
-| Keterangan | Detail |
-|------------|--------|
-| 📖 Mata Kuliah | Pemrograman Web 2 |
-| 📅 Semester | Genap 20XX/20XX |
-| 🏛️ Program Studi | Teknik Informatika |
-| 👨‍🏫 Dosen Pengampu | Nama Dosen |
-| 🏫 Institusi | Universitas Suryakancana|
+| Keterangan        | Detail                   |
+| ----------------- | ------------------------ |
+| 📖 Mata Kuliah    | Pemrograman Web 2        |
+| 📅 Semester       | Genap 20XX/20XX          |
+| 🏛️ Program Studi  | Teknik Informatika       |
+| 👨‍🏫 Dosen Pengampu | Nama Dosen               |
+| 🏫 Institusi      | Universitas Suryakancana |
 
 </div>
 
@@ -187,9 +102,4 @@ siakad/
 
 Proyek ini dibuat murni untuk keperluan akademik sebagai **Tugas Besar Mata Kuliah Pemrograman Web 2**.
 
-
 ---
-
-<div align="center">
-  <sub>Dibuat dengan ❤️ oleh Tim Pengembang SIAKAD &nbsp;·&nbsp; Pemrograman Web 2</sub>
-</div>

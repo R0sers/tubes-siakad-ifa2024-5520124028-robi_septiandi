@@ -1,0 +1,137 @@
+
+
+:root {
+    --navy-dark: #0d1b2e;
+    --navy: #1a2744;
+    --gold: #d4af37;
+    --blue: #2563eb;
+    --green: #0f9d58;
+}
+
+
+.hero-academic {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: #fff;
+    padding: 2.5rem 2.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+.hero-academic::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+.hero-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.hero-academic h1 {
+    font-weight: 700;
+    font-size: 1.85rem;
+    margin-bottom: 0.25rem;
+}
+.hero-academic p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+
+.stat-card {
+    border: none;
+    border-radius: 12px;
+    padding: 1.75rem;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(20,30,60,0.06);
+    border-left: 4px solid var(--accent, var(--navy));
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(20,30,60,0.1);
+}
+.stat-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7280;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+.stat-value {
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+}
+.stat-icon {
+    font-size: 1.4rem;
+    color: var(--accent, var(--navy));
+    margin-bottom: 0.75rem;
+}
+
+
+.section-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.section-title::before {
+    content: "";
+    width: 4px;
+    height: 18px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(20,30,60,0.06);
+    overflow: hidden;
+}
+.card .card-header {
+    background: #f8f9fb;
+    border-bottom: 1px solid #eef0f3;
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+    color: var(--navy);
+}
+.table thead th,
+.table-light {
+    background: var(--navy) !important;
+    color: #fff !important;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border: none !important;
+    padding: 0.85rem 1rem;
+}
+.table td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+}
+.table-bordered, .table-bordered td, .table-bordered th {
+    border-color: #eef0f3 !important;
+}
+
+/* Navbar override supaya senada dengan hero */
+.navbar.bg-dark {
+    background: var(--navy-dark) !important;
+}

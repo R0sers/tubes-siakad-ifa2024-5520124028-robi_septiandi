@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+
 
 class UserSeeder extends Seeder
 {
@@ -13,30 +14,35 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Akun admin
+        User::create([
+            ['name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345'),
+            'role' => 'admin'],
 
-        $userData = [
-            [
-                'name'=>'Admin',
-                'email'=>'admin@gmail.com',
-                'password'=>bcrypt('12345'),
-                'role'=>'admin'
-            ],
-            [
-                'name'=>'Mahasiswa',
-                'email'=>'Mahasiswa@gmail.com',
-                'password'=>bcrypt('12345'),
-                'role'=>'mahasiswa'
-            ],
-            [
-                'name'=>'Robi Septiandi',
-                'email'=>'robis@gmail.com',
-                'password'=>bcrypt('12345'),
-                'role'=>'mahasiswa'
-            ]
-        ];
-        foreach($userData as $key => $val){
-            User::create($val);
-        }    
+            ['name' => 'Mahasiswa',
+            'email' => 'mahasiswa@gmail.com',
+            'password' => bcrypt('12345'),
+            'role' => 'mahasiswa'],
 
+            ['name' => 'Robi Septiandi',
+            'email' => 'rose@gmail.com',
+            'password' => bcrypt('12345'),
+            'role' => 'mahasiswa'],
+        ]);
+
+
+        $mahasiswaList = DB::table('mahasiswa')->get();
+
+        foreach ($mahasiswaList as $mhs) {
+            User::create([
+                'name' => $mhs->nama,
+                'email' => $mhs->npm,
+                'password' => bcrypt('12345'),
+                'role' => 'mahasiswa',
+                'npm' => $mhs->npm,
+            ]);
+        }
     }
 }
