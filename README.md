@@ -91,6 +91,7 @@
 | ----------------- | ------------------------ |
 | admin@gmail.com    | Admin        |
 | mahasiswa@gmail.com       | Mahasiswa         |
+| NPM yang ada       | Mahasiswa         |
 
 
 </div>
