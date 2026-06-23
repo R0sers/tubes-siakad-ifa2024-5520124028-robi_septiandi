@@ -87,13 +87,11 @@
 
 <div align="center">
 
-| Keterangan        | Detail                   |
+| Username        | Role                   |
 | ----------------- | ------------------------ |
-| 📖 Mata Kuliah    | Pemrograman Web 2        |
-| 📅 Semester       | Genap 20XX/20XX          |
-| 🏛️ Program Studi  | Teknik Informatika       |
-| 👨‍🏫 Dosen Pengampu | Nama Dosen               |
-| 🏫 Institusi      | Universitas Suryakancana |
+| admin@gmail.com    | Admin        |
+| mahasiswa@gmail.com       | Mahasiswa         |
+
 
 </div>
 
