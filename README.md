@@ -83,7 +83,7 @@
 
 ---
 
-## 📌 Informasi Akademik
+## 📌 Informasi User
 
 <div align="center">
 
